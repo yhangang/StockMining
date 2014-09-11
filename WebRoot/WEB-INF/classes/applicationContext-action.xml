@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+	- Application context definition for JPetStore's business layer.
+	- Contains bean references to the transaction manager and to the DAOs in
+	- dataAccessContext-local/jta.xml (see web.xml's "contextConfigLocation").
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<!-- 登录开始 -->
+	<bean id="TUserDao" class="com.hibernate.dao.TUserDAO"
+		scope="prototype">
+	</bean>
+
+	<bean id="UserService" class="org.a805.service.impl.UserServiceImpl"
+		scope="prototype">
+		<property name="userDAO" ref="TUserDao"></property>
+	</bean>
+
+	<bean id="LoginAction" class="org.a805.struts2.action.LoginAction"
+		scope="prototype">
+		<property name="userService" ref="UserService"></property>
+		<property name="systemService" ref="SystemService"></property>
+	</bean>
+	<!-- 登录结束 -->
+
+
+	<!-- 用户管理开始 -->
+	<bean id="UserManagementAction" class="org.a805.struts2.action.UserManagementAction"
+		scope="prototype">
+		<property name="userService" ref="UserService"></property>
+	</bean>
+	<!-- 用户管理结束 -->
+	
+	<!-- 系统管理开始 -->
+		<bean id="TLoginLogDAO" class="com.hibernate.dao.TLoginLogDAO"
+		scope="prototype">
+	</bean>
+	
+		<bean id="SystemService" class="org.a805.service.impl.SystemServiceImpl"
+		scope="prototype">
+		<property name="loginLogDAO" ref="TLoginLogDAO"></property>
+	</bean>
+		<bean id="SystemManagementAction" class="org.a805.struts2.action.SystemManagementAction"
+		scope="prototype">
+		<property name="systemService" ref="SystemService"></property>
+	</bean>
+	
+	
+	<!-- 系统管理结束 -->
+	
+		<!-- 拦截器开始 -->
+	<bean id="AuthenticationInterceptor" class="org.a805.struts2.interceptor.AuthenticationInterceptor"
+		scope="prototype">
+	</bean>
+
+	<!-- 拦截器结束 -->
+	
+
+
+
+</beans>

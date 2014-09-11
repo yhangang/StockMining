@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+
+<struts>
+
+
+	<package name="links" extends="struts-default">
+			       <!-- 拦截器begin -->
+		<interceptors>
+			<interceptor name="Authentication"
+				class="AuthenticationInterceptor">
+			</interceptor>
+
+			<interceptor-stack name="InterceptorStack">
+				<interceptor-ref name="Authentication"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>	
+		
+		<default-interceptor-ref name="InterceptorStack"></default-interceptor-ref>
+	  <!-- 拦截器end -->
+					<global-results>
+			<result name="login">/login.jsp</result>
+		</global-results>
+		<!-- 公司治理 -->
+		
+		<action name="QueryExperiment" >
+			<result name="success">/Pages/CorpGovern/query_exp.jsp</result>
+		</action>
+		
+		<action name="MyExperiment">
+			<result name="success">/Pages/CorpGovern/MyExp.jsp</result>
+		</action>
+		
+		<action name="goNewExpAction" >
+			<result name="success">/Pages/CorpGovern/NewExp.jsp</result>
+		</action>
+		
+
+		<!-- 公司治理 -->
+	
+	<!-- 用户管理 -->
+		<action name="query_user" >
+			<result name="success">/Pages/UserManagement/query_user.jsp</result>
+		</action>
+		<action name="resetpwd" >
+			<result name="success">/Pages/UserManagement/resetpwd.jsp</result>
+		</action>
+
+		<!-- 用户管理 -->
+		
+		<!-- 系统管理 -->
+		<action name="goQueryLoginlog" >
+			<result name="success">/Pages/SystemManagement/query_loginlog.jsp</result>
+		</action>
+
+		<!-- 系统管理 -->
+		
+		
+	<!-- 帮助 -->
+		<action name="AboutUs" >
+			<result name="success">/Pages/Help/AboutUs.html</result>
+		</action>
+		<action name="ContactUs" >
+			<result name="success">/Pages/Help/ContactUs.html</result>
+		</action>
+	<!-- 帮助 -->	
+	
+		<!-- 提示页面 -->
+		<action name="404error" >
+			<result name="success">/Pages/AssistPages/404error.html</result>
+		</action>
+		<action name="500error" >
+			<result name="success">/Pages/AssistPages/500error.html</result>
+		</action>
+				<action name="success" >
+			<result name="success">/Pages/AssistPages/success.html</result>
+		</action>
+		<action name="fail" >
+			<result name="success">/Pages/AssistPages/fail.html</result>
+		</action>
+				<action name="lackofpower" >
+			<result name="success">/Pages/AssistPages/lackofpower.html</result>
+		</action>
+	<!-- 提示页面 -->
+
+
+
+	</package>
+</struts>

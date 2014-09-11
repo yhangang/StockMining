@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+
+<struts>
+
+
+	<package name="system" extends="struts-default">
+		<!-- 拦截器begin -->
+		<interceptors>
+			<interceptor name="Authentication"
+				class="AuthenticationInterceptor">
+			</interceptor>
+
+			<interceptor-stack name="InterceptorStack">
+				<interceptor-ref name="Authentication"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>	
+		
+		<default-interceptor-ref name="InterceptorStack"></default-interceptor-ref>
+	  <!-- 拦截器end -->
+					<global-results>
+			<result name="login">/login.jsp</result>
+		</global-results>
+
+			<action name="queryLoginlog" class="SystemManagementAction" method="query">
+			<result name="success">/Pages/SystemManagement/query_loginlog.jsp</result>
+			<result name="lackofpower">/Pages/AssistPages/lackofpower.html</result>
+		</action>
+		
+	
+	
+
+
+
+	</package>
+</struts>

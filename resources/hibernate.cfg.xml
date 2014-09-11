@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" 
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+
+		<property name="connection.url">
+			jdbc:mysql://localhost:3306/lab01?useUnicode=true&amp;characterEncoding=GBK
+		</property>
+
+		<property name="connection.username">root</property>
+
+		<property name="connection.password"></property>
+
+		<property name="connection.driver_class">
+			com.mysql.jdbc.Driver
+		</property>
+
+		<property name="dialect">
+			org.hibernate.dialect.MySQLDialect
+		</property>
+
+
+		<mapping resource="com/hibernate/entity/TUser.hbm.xml" />
+		<mapping resource="com/hibernate/entity/TLoginLog.hbm.xml" />
+		<mapping resource="com/hibernate/entity/TRole.hbm.xml" />
+		<mapping resource="com/hibernate/entity/TCompany.hbm.xml" />
+		<mapping resource="com/hibernate/entity/TIndex.hbm.xml" />
+		<mapping resource="com/hibernate/entity/TCompanyIndex.hbm.xml" />
+		<mapping
+			resource="com/hibernate/entity/TExperimentInformation.hbm.xml" />
+		<mapping
+			resource="com/hibernate/entity/TIndustryIndexAverage.hbm.xml" />
+		<mapping resource="com/hibernate/entity/TStCompany.hbm.xml" />
+		<mapping resource="com/hibernate/entity/TSysglobal.hbm.xml" />
+		<mapping resource="com/hibernate/entity/TExpPeriod.hbm.xml" />
+		<mapping resource="com/hibernate/entity/TExpCompany.hbm.xml" />
+		<mapping resource="com/hibernate/entity/TExpIndex.hbm.xml" />
+
+
+	</session-factory>
+</hibernate-configuration>

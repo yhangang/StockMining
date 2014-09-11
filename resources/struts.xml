@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+
+<struts>
+
+	<constant name="struts.action.extension" value="action,do" />
+
+	<include file="struts-default.xml"></include>
+	<include file="struts-corpgovern.xml"></include>
+	<include file="struts-user.xml"></include>
+	<include file="struts-system.xml"></include>
+	<include file="struts-links.xml"></include>
+	<include file="struts-jfreechart.xml"></include>
+
+	<package name="struts2" extends="struts-default">
+	       <!-- 拦截器begin -->
+		<interceptors>
+			<interceptor name="Authentication"
+				class="AuthenticationInterceptor">
+			</interceptor>
+
+			<interceptor-stack name="InterceptorStack">
+				<interceptor-ref name="Authentication"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>	
+				<global-results>
+			<result name="login">/login.jsp</result>
+		</global-results>
+	  <!-- 拦截器end -->
+
+		<action name="regexAction"
+			class="org.a805.struts2.action.RegexAction">
+		</action>
+
+		<action name="loginAction" class="LoginAction"
+			method="execute">
+			<result name="success">/Pages/MainFrame.html</result>
+			<result name="error">/error.jsp</result>
+		</action>
+
+		<action name="registerUser" >
+			<result name="success">/Pages/UserManagement/insert_user.jsp</result>
+		</action>
+		<action name="registerAction" class="LoginAction"
+			method="register">
+			<result name="success">/register.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+
+
+
+		<action name="reLoginAction" class="LoginAction"
+			method="reLogin">
+			<result name="success">/index.jsp</result>
+		</action>
+		
+		<action name="resetPwd" class="LoginAction" method="resetPwd">
+			<result name="success">/Pages/UserManagement/resetpwd.jsp</result>
+			<result name="error">/Pages/UserManagement/resetpwd.jsp</result>
+			<interceptor-ref name="InterceptorStack"></interceptor-ref>
+		</action>
+
+	</package>
+</struts>

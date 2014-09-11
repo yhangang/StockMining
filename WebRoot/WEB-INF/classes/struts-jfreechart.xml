@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+
+<struts>
+
+	<package name="jfreechart" extends="struts-default,jfreechart-default">
+			       <!-- 拦截器begin -->
+		<interceptors>
+			<interceptor name="Authentication"
+				class="AuthenticationInterceptor">
+			</interceptor>
+
+			<interceptor-stack name="InterceptorStack">
+				<interceptor-ref name="Authentication"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>	
+		
+		<default-interceptor-ref name="InterceptorStack"></default-interceptor-ref>
+	  <!-- 拦截器end -->
+					<global-results>
+			<result name="login">/login.jsp</result>
+		</global-results>
+		<!-- 报表绘制 -->
+		<action name="viewResult" class="org.a805.struts2.action.jfreechart.Test">
+     <result name="success" type="chart">
+         <param name="height">200</param>
+         <param name="width">300</param>
+     </result>
+ 		</action>
+		
+
+		
+
+		<!-- 报表绘制 -->
+	
+	
+
+
+
+	</package>
+</struts>

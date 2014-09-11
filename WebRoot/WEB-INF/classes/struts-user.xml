@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+
+<struts>
+
+
+	<package name="user" extends="struts-default">
+			<!-- 拦截器begin -->
+		<interceptors>
+			<interceptor name="Authentication"
+				class="AuthenticationInterceptor">
+			</interceptor>
+
+			<interceptor-stack name="InterceptorStack">
+				<interceptor-ref name="Authentication"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>	
+		
+	  <!-- 拦截器end -->
+					<global-results>
+			<result name="login">/login.jsp</result>
+		</global-results>
+
+	<action name="queryTUser" class="UserManagementAction" method="query">
+			<result name="success">/Pages/UserManagement/query_user.jsp</result>
+						<interceptor-ref name="InterceptorStack"></interceptor-ref>
+		</action>
+			<action name="deleteTUser" class="UserManagementAction" method="delete">
+			<result name="success">/Pages/AssistPages/success.html</result>
+			<result name="error">/Pages/AssistPages/fail.html</result>
+			<result name="lackofpower">/Pages/AssistPages/lackofpower.html</result>
+						<interceptor-ref name="InterceptorStack"></interceptor-ref>
+		</action>
+		
+			<action name="goEditTUser" class="UserManagementAction" method="findTUserById">
+			<result name="success">/Pages/UserManagement/edit_user.jsp</result>
+			<result name="lackofpower">/Pages/AssistPages/lackofpower.html</result>
+						<interceptor-ref name="InterceptorStack"></interceptor-ref>
+		</action>
+		
+			<action name="editTUser" class="UserManagementAction" method="update">
+			<result name="success">/Pages/AssistPages/success.html</result>
+			<result name="error">/Pages/AssistPages/fail.html</result>
+						<interceptor-ref name="InterceptorStack"></interceptor-ref>
+		</action>
+		
+		<action name="registerUser">
+			<result name="success">/Pages/UserManagement/insert_user.jsp</result>
+		</action>
+		
+		<action name="saveTUser" class="UserManagementAction" method="save">
+			<result name="success">index.jsp</result>
+			<result name="error">index.jsp</result>
+		</action>
+		
+		<action name="ajaxValidate" class="UserManagementAction" method="ajaxValidate">
+		</action>
+	
+
+
+
+	</package>
+</struts>

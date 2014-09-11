@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+
+<struts>
+
+
+	<package name="corpgovern" extends="struts-default">
+		       <!-- 拦截器begin -->
+		<interceptors>
+			<interceptor name="Authentication"
+				class="AuthenticationInterceptor">
+			</interceptor>
+
+			<interceptor-stack name="InterceptorStack">
+				<interceptor-ref name="Authentication"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>	
+		
+		
+		
+		<default-interceptor-ref name="InterceptorStack"></default-interceptor-ref>
+	  <!-- 拦截器end -->
+	  				<global-results>
+			<result name="login">/login.jsp</result>
+		</global-results>
+		
+		<action name="goPeriodSelectAction" class="ExpInfoSubmitAction" method="execute">
+			<result name="success">/Pages/CorpGovern/NewExp.jsp</result>
+		</action>
+	
+	<action name="goCompanySelectAction" class="PeriodSelectAction" method="execute">
+			<result name="success">/Pages/CorpGovern/CompanySelect.jsp</result>
+		</action>
+
+		<action name="goIndexSelectAction" class="ExpCompanyAction" method="save">
+			<result name="success">/Pages/CorpGovern/IndexSelect.jsp</result>
+		</action>
+		
+			<action name="goGuiyueAction" class="ExpIndexAction" method="save">
+			<result name="success">/Pages/CorpGovern/Guiyue.jsp</result>
+		</action>
+		
+		<action name="goClusteringAction" class="GuiyueSubmitAction" method="execute">
+			<result name="success">/Pages/CorpGovern/Clustering.jsp</result>
+		</action>
+		
+		<action name="goCalculateAction" >
+			<result name="success">/Pages/CorpGovern/CalculateResult.jsp</result>
+		</action>
+		
+		<action name="data_display" >
+			<result name="success">/Pages/CorpGovern/data_display.jsp</result>
+		</action>
+		
+		<!-- 选择时期开始 -->
+
+		
+		
+		<!-- 选择时期结束 -->
+
+	<!-- 选择公司开始 -->
+			<action name="queryCompany" class="CompanySelectAction" method="queryCompany">
+			<result name="success">/Pages/CorpGovern/CompanySelect.jsp</result>
+		</action>
+		
+		<action name="selectCompany" class="CompanySelectAction" method="selectCompany">
+			<result name="success">/Pages/CorpGovern/CompanySelect.jsp</result>
+		</action>
+		
+		<action name="unSelectCompany" class="CompanySelectAction" method="unSelectCompany">
+			<result name="success">/Pages/CorpGovern/CompanySelect.jsp</result>
+		</action>
+		
+		<action name="clearAllCompany" class="CompanySelectAction" method="clearAllCompany">
+			<result name="success">/Pages/CorpGovern/CompanySelect.jsp</result>
+		</action>
+		
+		<action name="refreshCompany" class="CompanySelectAction" method="refreshCompany">
+			<result name="success">/Pages/CorpGovern/CompanySelect.jsp</result>
+		</action>
+		
+		
+		
+		<!-- 选择公司结束 -->
+		
+		<!-- 选择指标开始 -->
+		<action name="queryIndex" class="IndexSelectAction" method="queryIndex">
+		</action>
+		
+		<action name="selectIndex" class="IndexSelectAction" method="selectIndex">
+		</action>
+		
+		<action name="unSelectIndex" class="IndexSelectAction" method="unSelectIndex">
+		</action>
+		
+		<action name="clearAllIndex" class="IndexSelectAction" method="clearAllIndex">
+		</action>
+		
+		<action name="refreshIndex" class="IndexSelectAction" method="refreshIndex">
+		</action>
+
+		<!-- 选择指标结束 -->
+		
+		<!-- 公司指标数值显示开始 -->
+		<action name="companyIndexDisplayAction" class="CompanyIndexDisplayAction" method="companyIndexDisplay">
+			<result name="success">/Pages/CorpGovern/CompanySelect.jsp</result>
+		</action>
+		<!-- 公司指标数值显示结束 -->
+		
+		<!-- 显示规约结果开始 -->
+		<action name="showGuiyueResultAction" class="ShowGuiyueResultAction" method="showGuiyueResult">
+			<result name="success">/Pages/CorpGovern/CompanySelect.jsp</result>
+		</action>
+				<action name="showGuiyueResultHexadecimal" class="ShowGuiyueResultAction" method="showGuiyueResultHexadecimal">
+			<result name="success">/Pages/CorpGovern/CompanySelect.jsp</result>
+		</action>
+		<!-- 显示规约结果结束 -->
+		
+		
+		<!-- 聚类开始 -->
+		<action name="clusteringOfAgglomerate" class="ClusteringAction" method="ClusteringOfAgglomerate">
+			<result name="success">/Pages/CorpGovern/CalculateResult.jsp</result>
+		</action>
+
+		<!-- 聚类结束 -->
+		
+		<!-- 实验管理开始 -->
+		<action name="queryExpInfo" class="ExperimentInformationAction" method="query">
+			<result name="success">/Pages/CorpGovern/query_exp.jsp</result>
+		</action>
+		
+		<action name="queryMyExp" class="ShowMyExpAction" method="query">
+			<result name="success">/Pages/CorpGovern/MyExp.jsp</result>
+		</action>
+
+		<!-- 实验管理结束 -->
+		
+		<!-- LinkTo -->
+		<action name="toPeriodSelect" class="LinkToAction" method="toPeriodSelect">
+			<result name="success">/Pages/CorpGovern/PeriodSelect.jsp</result>
+		</action>
+		
+		
+		
+		<!-- LinkTo -->
+		
+	</package>
+</struts>

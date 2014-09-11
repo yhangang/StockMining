@@ -1,0 +1,16 @@
+<script type="text/javascript" src="WdatePicker.js"></script>
+
+yyyy-MM-dd
+<br>
+<input class="Wdate" type="text" id="d1" onFocus="WdatePicker({isShowClear:true,readOnly:true})"/>
+<p>
+	
+yyyy-MM-dd HH:mm
+<br>
+<input class="Wdate" type="text" name="birthday" id="d2" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd HH:mm'})"/>
+<p>	
+	
+yyyy-MM-dd HH:mm
+<br>
+<input class="Wdate" type="text" name="birthday" id="d3" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd HH:mm'})"/>
+<p>	

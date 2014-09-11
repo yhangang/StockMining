@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+	- Application context definition for JPetStore's business layer.
+	- Contains bean references to the transaction manager and to the DAOs in
+	- dataAccessContext-local/jta.xml (see web.xml's "contextConfigLocation").
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<!-- 选择时期开始-->
+	<bean id="TExpPeriodDAO" class="com.hibernate.dao.TExpPeriodDAO"
+		scope="prototype">
+	</bean>
+	
+	<bean id="ExpPeriodService" class="org.a805.service.impl.corpgovern.ExpPeriodServiceImpl"
+		scope="prototype">
+		<property name="expPeriodDAO" ref="TExpPeriodDAO"></property>
+	</bean>
+	
+	<bean id="PeriodSelectAction" class="org.a805.struts2.action.corpgovern.PeriodSelectAction"
+		scope="prototype">
+		<property name="expPeriodService" ref="ExpPeriodService"></property>
+	</bean>
+	
+	
+	<!-- 选择时期结束 -->	
+	
+	<!-- 选择公司开始-->
+		<bean id="TCompanyDAO" class="com.hibernate.dao.TCompanyDAO"
+		scope="prototype">
+	</bean>
+	
+			<bean id="TExpCompanyDAO" class="com.hibernate.dao.TExpCompanyDAO"
+		scope="prototype">
+	</bean>
+	
+		<bean id="CompanySelectService" class="org.a805.service.impl.corpgovern.CompanySelectServiceImpl"
+		scope="prototype">
+		<property name="companyDAO" ref="TCompanyDAO"></property>
+	</bean>
+	
+	<bean id="ExpCompanyService" class="org.a805.service.impl.corpgovern.ExpCompanyServiceImpl"
+		scope="prototype">
+		<property name="expCompanyDAO" ref="TExpCompanyDAO"></property>
+	</bean>
+	
+			<bean id="CompanySelectAction" class="org.a805.struts2.action.corpgovern.CompanySelectAction"
+		scope="prototype">
+		<property name="companySelectService" ref="CompanySelectService"></property>
+	</bean>
+	
+			<bean id="ExpInfoSubmitAction" class="org.a805.struts2.action.corpgovern.ExpInfoSubmitAction"
+		scope="prototype">
+		<property name="experimentInformationService" ref="ExperimentInformationService"></property>
+	</bean>
+	
+		<bean id="ExpCompanyAction" class="org.a805.struts2.action.corpgovern.ExpCompanyAction"
+		scope="prototype">
+		<property name="expCompanyService" ref="ExpCompanyService"></property>
+	</bean>
+	
+	
+	
+	
+	<!-- 选择公司结束 -->
+	
+		<!-- 选择指标开始-->
+		<bean id="TIndexDAO" class="com.hibernate.dao.TIndexDAO"
+		scope="prototype">
+	</bean>
+	
+		<bean id="IndexSelectService" class="org.a805.service.impl.corpgovern.IndexSelectServiceImpl"
+		scope="prototype">
+		<property name="indexDAO" ref="TIndexDAO"></property>
+	</bean>
+	
+			<bean id="IndexSelectAction" class="org.a805.struts2.action.corpgovern.IndexSelectAction"
+		scope="prototype">
+		<property name="indexSelectService" ref="IndexSelectService"></property>
+	</bean>
+	
+			<bean id="TExpIndexDAO" class="com.hibernate.dao.TExpIndexDAO"
+		scope="prototype">
+	</bean>
+	
+		<bean id="ExpIndexService" class="org.a805.service.impl.corpgovern.ExpIndexServiceImpl"
+		scope="prototype">
+		<property name="expIndexDAO" ref="TExpIndexDAO"></property>
+	</bean>
+	
+			<bean id="ExpIndexAction" class="org.a805.struts2.action.corpgovern.ExpIndexAction"
+		scope="prototype">
+		<property name="expIndexService" ref="ExpIndexService"></property>
+	</bean>
+	
+	<!-- 选择指标结束 -->
+	
+	<!-- 公司指标数值展示开始 -->
+			<bean id="TCompanyIndexDAO" class="com.hibernate.dao.TCompanyIndexDAO"
+		scope="prototype">
+	</bean>
+	
+		<bean id="CompanyIndexService" class="org.a805.service.impl.corpgovern.CompanyIndexServiceImpl"
+		scope="prototype">
+		<property name="companyIndexDAO" ref="TCompanyIndexDAO"></property>
+		<property name="companyDAO" ref="TCompanyDAO"></property>
+		<property name="indexDAO" ref="TIndexDAO"></property>
+	</bean>
+	
+			<bean id="CompanyIndexDisplayAction" class="org.a805.struts2.action.corpgovern.CompanyIndexDisplayAction"
+		scope="prototype">
+		<property name="companyIndexService" ref="CompanyIndexService"></property>
+	</bean>
+	
+	<!-- 公司指标数值展示结束 -->
+	
+		<!-- 规约开始 -->
+	
+		<bean id="GuiyueService" class="org.a805.service.impl.corpgovern.GuiyueServiceImpl"
+		scope="prototype">
+		<property name="companyIndexDAO" ref="TCompanyIndexDAO"></property>
+		<property name="industryAvgService" ref="GetIndustryAvgService"></property>
+	</bean>
+	
+	<bean id="ShowGuiyueResultService" class="org.a805.service.impl.corpgovern.ShowGuiyueResultServiceImpl"
+		scope="prototype">
+		<property name="companyIndexDAO" ref="TCompanyIndexDAO"></property>
+		<property name="companyDAO" ref="TCompanyDAO"></property>
+		<property name="indexDAO" ref="TIndexDAO"></property>
+	</bean>
+	
+		<bean id="ShowGuiyueResultAction" class="org.a805.struts2.action.corpgovern.ShowGuiyueResultAction"
+		scope="prototype">
+		<property name="showGuiyueResultService" ref="ShowGuiyueResultService"></property>
+	</bean>
+	
+			<bean id="GuiyueSubmitAction" class="org.a805.struts2.action.corpgovern.GuiyueSubmitAction"
+		scope="prototype">
+	</bean>
+	
+	<bean id="TIndustryIndexAverageDAO" class="com.hibernate.dao.TIndustryIndexAverageDAO"
+		scope="prototype">
+	</bean>
+	
+			<bean id="GetIndustryAvgService" class="org.a805.service.impl.corpgovern.GetIndustryAvgServiceImpl"
+		scope="prototype">
+		<property name="industryIndexAverageDAO" ref="TIndustryIndexAverageDAO"></property>
+		<property name="companyDAO" ref="TCompanyDAO"></property>
+	</bean>
+	
+	
+	
+	<!-- 规约结束 -->
+	
+	<!-- 聚类开始 -->
+	
+		<bean id="ClusteringService" class="org.a805.service.impl.corpgovern.ClusteringServiceImpl"
+		scope="prototype">
+	</bean>
+	
+		<bean id="ClusteringAction" class="org.a805.struts2.action.corpgovern.ClusteringAction"
+		scope="prototype">
+		<property name="clusteringService" ref="ClusteringService"></property>
+			<property name="showGuiyueResultService" ref="ShowGuiyueResultService"></property>
+			<property name="experimentInformationService" ref="ExperimentInformationService"></property>
+					<property name="expCompanyService" ref="ExpCompanyService"></property>
+			<property name="expIndexService" ref="ExpIndexService"></property>
+			<property name="expPeriodService" ref="ExpPeriodService"></property>
+	</bean>
+	
+	
+	<!-- 聚类开始 -->
+	
+		<!-- 查找试验开始 -->
+	
+		<bean id="TExperimentInformationDAO" class="com.hibernate.dao.TExperimentInformationDAO" scope="prototype">
+		</bean>
+		
+			<bean id="ExperimentInformationService" class="org.a805.service.impl.corpgovern.ExperimentInformationServiceImpl"
+		scope="prototype">
+		<property name="experimentInformationDAO" ref="TExperimentInformationDAO"></property>
+	</bean>
+	
+		<bean id="ExperimentInformationAction" class="org.a805.struts2.action.corpgovern.ExperimentInformationAction"
+		scope="prototype">
+		<property name="experimentInformationService" ref="ExperimentInformationService"></property>
+	</bean>
+	
+	<bean id="ShowMyExpAction" class="org.a805.struts2.action.corpgovern.ShowMyExpAction"
+		scope="prototype">
+		<property name="experimentInformationService" ref="ExperimentInformationService"></property>
+	</bean>
+	
+	
+	<!-- 查找试验结束 -->
+	
+			<bean id="LinkToAction" class="org.a805.struts2.action.corpgovern.LinkToAction"
+		scope="prototype">
+		
+	</bean>
+
+
+</beans>

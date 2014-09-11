@@ -1,0 +1,29 @@
+/* 
+@ CSS TopLeftHeadStatic 
+@ 作者：宋延军 
+@ 功能：专门  冻结 Html 表头行 + 表头列 
+@ 日期：2011-12-28 下午20:18:22 
+@ 邮箱：songyanju_stars@126.com 
+@ QQ号：181744926 
+*/  
+/* 数据表头行 */  
+.FixedTitleRow  
+{  
+    position: relative;   
+    top: expression(this.offsetParent.scrollTop);   
+    z-index: 10;  
+    /*background-color: #E6ECF0;*/  
+}  
+/* 数据表头列 */  
+.FixedTitleColumn  
+{  
+    position: relative;   
+    left: expression(this.parentElement.offsetParent.scrollLeft);  
+}  
+/* 数据列 */  
+.FixedDataColumn  
+{  
+    position: relative;  
+    left: expression(this.parentElement.offsetParent.parentElement.scrollLeft);  
+    /*background-color: #E6ECF0;*/   
+}  
